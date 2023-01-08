@@ -1,0 +1,14 @@
+{% load draw_menu %}
+
+<ul>
+  {% for menu_item in menu_items %}
+    <li data-submenu="{{ menu_item.id }}">
+      {{ menu_item.title }}
+      {% if menu_item.children.exists %}
+        <ul class="submenu-{{ menu_item.id }}">
+            {% draw_menu menu_item.children %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
