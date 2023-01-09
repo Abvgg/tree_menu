@@ -8,23 +8,24 @@
 <!-- Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-
-<ul>
-  {% for item in menu_items %}
-    {% if item.parent %}
-      {% if item.parent.id == parent_id %}
-        <li>
-          <a href="{{ item.url }}">{{ item.name }}</a>
-          {% include 'base.html' with parent_id=item.id %}
-        </li>
+<body> 
+  <ul>
+    {% for item in menu_items %}
+      {% if item.parent %}
+        {% if item.parent.id == parent_id %}
+          <li>
+            <a href="{{ item.url }}">{{ item.name }}</a>
+            {% include 'base.html' with parent_id=item.id %}
+          </li>
+        {% endif %}
+      {% else %}
+        {% if not parent_id %}
+          <li>
+            <a href="{{ item.url }}">{{ item.name }}</a>
+            {% include 'base.html' with parent_id=item.id %}
+          </li>
+        {% endif %}
       {% endif %}
-    {% else %}
-      {% if not parent_id %}
-        <li>
-          <a href="{{ item.url }}">{{ item.name }}</a>
-          {% include 'base.html' with parent_id=item.id %}
-        </li>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </ul>
+</body>
